@@ -16,13 +16,13 @@ class BrowseHabitsAdapter(private val habits: ArrayList<Habit>) :
 
         return ViewHolder(itemView, object: HabitClickListener {
             override fun onDecrease(position: Int) {
-                val streak = itemView.dayCounter.text.toString().toInt()
-                itemView.dayCounter.text = streak.dec().toString()
+                habits[position].streak = habits[position].streak.dec()
+                itemView.dayCounter.text = habits[position].streak.toString()
             }
 
             override fun onIncrease(position: Int) {
-                val streak = itemView.dayCounter.text.toString().toInt()
-                itemView.dayCounter.text = streak.inc().toString()
+                habits[position].streak = habits[position].streak.inc()
+                itemView.dayCounter.text = habits[position].streak.toString()
             }
 
             override fun onEdit(position: Int) {
@@ -43,25 +43,20 @@ class BrowseHabitsAdapter(private val habits: ArrayList<Habit>) :
     override fun getItemCount() = habits.size
 
 
-    class ViewHolder(itemView : View, listener : HabitClickListener) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    class ViewHolder(itemView : View, private val listener: HabitClickListener) : RecyclerView.ViewHolder(itemView) {
         val habitTitle: TextView = itemView.habitTitle
         val streak: TextView = itemView.dayCounter
-        val decreaseCounterButton : Button = itemView.decreaseCounterButton
-        val increaseCounterButton : Button = itemView.increaseCounterButton
-        val listener = listener
+        private val decreaseCounterButton : Button = itemView.decreaseCounterButton
+        private val increaseCounterButton : Button = itemView.increaseCounterButton
 
         init {
-            decreaseCounterButton.setOnClickListener(this)
-            increaseCounterButton.setOnClickListener(this)
-        }
-
-        override fun onClick(v: View?) {
-            when (itemView.id) {
-                itemView.decreaseCounterButton.id -> listener.onDecrease(this.layoutPosition)
-                itemView.increaseCounterButton.id -> listener.onIncrease(this.layoutPosition)
+            decreaseCounterButton.setOnClickListener {
+                listener.onDecrease(this.layoutPosition)
+            }
+            increaseCounterButton.setOnClickListener {
+                listener.onIncrease(this.layoutPosition)
             }
         }
-    }
 
     interface HabitClickListener {
         fun onDecrease(position : Int)
