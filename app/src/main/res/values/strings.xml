@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ZeroDayTracker</string>
+    <string name="default_card_title">Card Title</string>
+    <string name="title_activity_browse_habits2">BrowseHabitsActivity22</string>
+</resources>
