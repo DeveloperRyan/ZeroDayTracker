@@ -20,12 +20,15 @@ class BrowseHabitsAdapter(private val habits: ArrayList<Habit>) :
                 val intent = Intent(context, HabitViewActivity::class.java)
                     .putExtra("HABIT_TITLE", habits[position].title)
                     .putExtra("HABIT_STREAK", habits[position].streak.toString())
+                    .putExtra("HABIT_COLOR", habits[position].cardColor)
                 context.startActivity(intent)
             }
 
             override fun onDecrease(position: Int) {
-                habits[position].streak = habits[position].streak.dec()
-                itemView.dayCounter.text = habits[position].streak.toString()
+                if (habits[position].streak > 0) {
+                    habits[position].streak = habits[position].streak.dec()
+                    itemView.dayCounter.text = habits[position].streak.toString()
+                }
             }
 
             override fun onIncrease(position: Int) {
