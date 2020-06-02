@@ -1,10 +1,10 @@
 package com.zerodaytracker.zerodaytracker
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.habit_card.view.*
 
@@ -15,6 +15,14 @@ class BrowseHabitsAdapter(private val habits: ArrayList<Habit>) :
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.habit_card, parent, false)
 
         return ViewHolder(itemView, object: HabitClickListener {
+            override fun onCardClick(position: Int) {
+                val context = itemView.context
+                val intent = Intent(context, HabitViewActivity::class.java)
+                    .putExtra("HABIT_TITLE", habits[position].title)
+                    .putExtra("HABIT_STREAK", habits[position].streak.toString())
+                context.startActivity(intent)
+            }
+
             override fun onDecrease(position: Int) {
                 habits[position].streak = habits[position].streak.dec()
                 itemView.dayCounter.text = habits[position].streak.toString()
@@ -26,7 +34,8 @@ class BrowseHabitsAdapter(private val habits: ArrayList<Habit>) :
             }
 
             override fun onEdit(position: Int) {
-                TODO("Change Activity to Edit")
+                habits[position].streak = habits[position].streak.dec()
+                itemView.dayCounter.text = habits[position].streak.toString()
             }
         })
 
@@ -38,6 +47,7 @@ class BrowseHabitsAdapter(private val habits: ArrayList<Habit>) :
 
         holder.habitTitle.text = currentItem.title
         holder.streak.text = currentItem.streak.toString()
+        holder.cardContainer.setBackgroundColor(habits[position].cardColor)
     }
 
     override fun getItemCount() = habits.size
@@ -46,19 +56,31 @@ class BrowseHabitsAdapter(private val habits: ArrayList<Habit>) :
     class ViewHolder(itemView : View, private val listener: HabitClickListener) : RecyclerView.ViewHolder(itemView) {
         val habitTitle: TextView = itemView.habitTitle
         val streak: TextView = itemView.dayCounter
+        val cardContainer: LinearLayout = itemView.cardContainer
+
         private val decreaseCounterButton : Button = itemView.decreaseCounterButton
         private val increaseCounterButton : Button = itemView.increaseCounterButton
+        val editCardButton : ImageView = itemView.editButton
 
         init {
+            itemView.setOnClickListener {
+                listener.onCardClick(this.layoutPosition)
+            }
             decreaseCounterButton.setOnClickListener {
                 listener.onDecrease(this.layoutPosition)
             }
             increaseCounterButton.setOnClickListener {
                 listener.onIncrease(this.layoutPosition)
             }
+            editCardButton.setOnClickListener {
+                listener.onEdit(this.layoutPosition)
+            }
         }
 
+    }
+
     interface HabitClickListener {
+        fun onCardClick(position : Int)
         fun onDecrease(position : Int)
         fun onIncrease(position : Int)
         fun onEdit(position : Int)

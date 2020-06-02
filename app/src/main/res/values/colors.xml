@@ -3,4 +3,38 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="cardRed">#ef5350</color>
+    <color name="cardPink">#ec407a</color>
+    <color name="cardPurple">#ab47bc</color>
+    <color name="cardDeepPurple">#7e57c2</color>
+    <color name="cardIndigo">#5c6bc0</color>
+    <color name="cardBlue">#42a5f5</color>
+    <color name="cardLightBlue">#29b6f6</color>
+    <color name="cardCyan">#26c6da</color>
+    <color name="cardTeal">#26a69a</color>
+    <color name="cardGreen">#66bb6a</color>
+    <color name="cardLightGreen">#9ccc65</color>
+    <color name="cardYellow">#ffee58</color>
+    <color name="cardAmber">#ffca28</color>
+    <color name="cardOrange">#ffa726</color>
+    <color name="cardDeepOrange">#ff7043</color>
+    
+    <integer-array name="cardColors">
+        <item>@color/cardRed</item>
+        <item>@color/cardPink</item>
+        <item>@color/cardPurple</item>
+        <item>@color/cardDeepPurple</item>
+        <item>@color/cardIndigo</item>
+        <item>@color/cardBlue</item>
+        <item>@color/cardLightBlue</item>
+        <item>@color/cardCyan</item>
+        <item>@color/cardTeal</item>
+        <item>@color/cardGreen</item>
+        <item>@color/cardLightGreen</item>
+        <item>@color/cardYellow</item>
+        <item>@color/cardAmber</item>
+        <item>@color/cardOrange</item>
+        <item>@color/cardDeepOrange</item>
+    </integer-array>
 </resources>

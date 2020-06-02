@@ -13,10 +13,11 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    tools:context=".MainActivity">
+    tools:context=".BrowseHabitsActivity">
 
 
     <LinearLayout
+        android:id="@+id/cardContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -44,12 +45,14 @@
                 android:layout_weight="1" />
 
             <ImageView
-                android:id="@+id/settingsIcon"
+                android:id="@+id/editButton"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="bottom"
-                android:layout_marginRight="10dp"
-                app:srcCompat="@android:drawable/ic_menu_manage" />
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_edit"
+                android:contentDescription="TODO" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -60,6 +63,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:background="#ffffff"
                 android:id="@+id/decreaseCounterButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -81,6 +85,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="0"
                 android:textAlignment="center"
+                android:textColor="#ffffff"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -90,6 +95,7 @@
                 android:layout_weight="1" />
 
             <Button
+                android:background="#ffffff"
                 android:id="@+id/increaseCounterButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
